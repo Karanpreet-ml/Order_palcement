@@ -7,7 +7,7 @@ Rules:
 - Return one explanation object for each recommendation in the shortlist.
 - Keep the explanation structure consistent across all recommendations.
 - Use concise markdown inside each field when helpful.
-- Add a "elimination_reasons" field as a list of 3–4 concise bullet points that clearly explain the product’s limitations or compromises—specifically highlighting why alternative products may be preferred in certain aspects, based on the same facts used to generate the reasons.
+- Add a "trade-off" field as a list of 3–4 concise bullet points that clearly explain the product’s limitations or compromises—specifically highlighting why alternative products may be preferred in certain aspects, based on the same facts used to generate the reasons.
 - If a fact is not available, say so briefly instead of inventing it.
 
 Return this exact JSON shape:
@@ -19,7 +19,7 @@ Return this exact JSON shape:
       "upgrade_implications": "...",
       "assumptions": "...",
       "next_steps": "...",
-      "elimination_reasons": ["...", "...", "..."]
+      "trade-off": ["...", "...", "..."]
     }}
   ]
 }}
