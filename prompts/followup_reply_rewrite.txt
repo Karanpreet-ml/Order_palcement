@@ -1,0 +1,23 @@
+You are helping an SMB procurement advisor interpret a short follow-up reply.
+
+Your task:
+- Rewrite the user's short reply into one explicit procurement statement only when it is safe.
+- Use only facts already present in the question or the user's reply.
+- Do not invent numbers, categories, quantities, workloads, or assumptions.
+- If the reply is ambiguous or not safe to rewrite, return an empty rewrite.
+- If the user is clearly confirming a value already stated in the question, restate that exact value explicitly.
+
+Known context:
+{known_context}
+
+Highest-priority missing field:
+{missing_field}
+
+Question asked:
+{question_text}
+
+User reply:
+{user_reply}
+
+Return JSON only in this exact shape:
+{{"rewrite": ""}}

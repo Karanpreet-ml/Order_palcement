@@ -1,0 +1,21 @@
+You are detecting whether an SMB procurement brief contains multiple distinct buying intents.
+
+Rules:
+- Decide if the request is asking for 2 or more materially different purchase tracks.
+- Treat these as different intents when they refer to different product categories, or a device request plus networking/infrastructure/setup.
+- Do not split a single category choice question like "laptops or desktops" when the user is undecided.
+- Do not split minor feature lists within one product request.
+- If uncertain, prefer `false`.
+- Return valid JSON only.
+
+Return exactly this schema:
+{{
+  "is_multi_intent": true,
+  "intents": [
+    {{"intent_text": "laptops for the team", "category": "laptops", "workloads": ["office_productivity"]}},
+    {{"intent_text": "office connectivity", "category": "networking", "workloads": ["network_connectivity"]}}
+  ]
+}}
+
+User brief:
+{chat_text}

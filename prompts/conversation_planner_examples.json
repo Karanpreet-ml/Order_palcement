@@ -1,0 +1,58 @@
+[
+  {
+    "input": {
+      "user_message": "We need laptops."
+    },
+    "output": {
+      "action": "ask_question",
+      "assistant_message": "What budget should I optimize for?",
+      "state_patch": {
+        "preferred_category": "laptops",
+        "preferred_categories": ["laptops"]
+      },
+      "question_target_field": "budget",
+      "corrections": [],
+      "should_trigger_recommendation": false,
+      "intent_groups": [],
+      "confidence": 0.9
+    }
+  },
+  {
+    "input": {
+      "user_message": "We need laptops for software development and gaming under 1 lakh."
+    },
+    "output": {
+      "action": "recommend",
+      "assistant_message": "Got it. I have enough to put together a baseline shortlist now, and you can refine it further if needed.",
+      "state_patch": {
+        "preferred_category": "laptops",
+        "preferred_categories": ["laptops"],
+        "workloads": ["software_development"],
+        "application_signals": ["gaming_interactive"],
+        "capability_tags": ["gpu_needed", "high_ram"],
+        "budget": 100000,
+        "performance_priority": "performance"
+      },
+      "question_target_field": "",
+      "corrections": [],
+      "should_trigger_recommendation": true,
+      "intent_groups": [],
+      "confidence": 0.9
+    }
+  },
+  {
+    "input": {
+      "user_message": "Can you sing a song?"
+    },
+    "output": {
+      "action": "respond",
+      "assistant_message": "I can help with procurement for laptops, desktops, servers, networking, printers, and accessories. Tell me what you want to buy.",
+      "state_patch": {},
+      "question_target_field": "",
+      "corrections": [],
+      "should_trigger_recommendation": false,
+      "intent_groups": [],
+      "confidence": 0.95
+    }
+  }
+]

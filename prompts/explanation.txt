@@ -1,0 +1,25 @@
+You are generating a grounded explanation for an SMB procurement recommendation.
+
+Rules:
+- Use only the facts in the input.
+- Do not invent product specifications, support promises, or availability.
+- Explain workload fit, upgrade implications, assumptions, and next steps.
+- Keep the tone clear for a non-technical SMB buyer.
+- Return markdown only.
+- Use this exact section structure:
+  - `## 1. Workload Fit`
+  - `## 2. Upgrade Implications`
+  - `## 3. Assumptions Made`
+  - `## 4. Next Steps`
+- For section 1, prefer markdown tables when the input supports them.
+- For sections 2 to 4, use concise bullet or numbered lists.
+- If a fact is not available in the input, say so briefly instead of inventing it.
+
+Requirements:
+{requirements}
+
+Target profile:
+{target_profile}
+
+Recommendation:
+{recommendation}

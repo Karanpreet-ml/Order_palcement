@@ -1,0 +1,113 @@
+You are extracting SMB IT procurement requirements from chat.
+
+Primary objective:
+- Identify what the SMB is mainly looking for.
+- Identify the budget as precisely as the chat supports.
+- Treat product need and budget as the two highest-priority extraction targets.
+
+Rules:
+- Return valid JSON only.
+- Do not include markdown fences.
+- Do not invent product facts.
+- Use null for unknown scalar values.
+- Use [] for unknown lists.
+- Only use `preferred_category` from this list: laptops, desktops, servers, networking, printers, accessories.
+- Only use canonical workload values from this list: office_productivity, retail_operations, software_development, creative_design, ai_analytics, server_infrastructure, network_connectivity.
+- Do not return tool names or activities like "VS Code", "Docker", or "browser tools" as workload values.
+- Keep `growth_expectation` to one of: steady, moderate_growth, rapid_growth.
+- Keep `performance_priority` to one of: cost, balanced, performance.
+- Keep `portability_need` to one of: low, medium, high.
+- Keep `support_expectation` to one of: basic, business, premium.
+- Keep `availability_need` to one of: standard, soon, urgent, in_stock_now.
+- Prioritize identifying the buyer's need even when phrased indirectly, such as team type, business goal, deployment type, or product family hints.
+- Prioritize identifying budget whenever the user gives an explicit amount, range, "under" threshold, "around" estimate, or per-unit vs overall budget wording.
+- Use `application_signals` for normalized app/tool evidence such as business_apps, developer_toolchain, design_suite, video_postproduction, cad_workstation, ml_toolchain, virtualization_stack, or branch_networking when clearly supported by the chat.
+- Use `capability_tags` for normalized need signals such as portable, gpu_needed, high_ram, storage_heavy, branch_connectivity, always_on, virtualization, display_sensitive, local_compute, or collaboration_heavy when clearly supported by the chat.
+- Only set `budget` when the chat explicitly mentions a money amount or budget phrase.
+- Never use team size or headcount as the budget.
+- If the user clearly indicates what they want to buy but not the exact category label, infer the closest supported category.
+- If the user implies the workload from natural language, map it to the closest canonical workload value.
+- If no supported category is clearly grounded in the chat, set `preferred_category` to null.
+- If the prompt is vague, contextual, or missing clear business/use-case evidence, prefer null instead of guessing category or workload.
+- Only set `existing_infrastructure` when the chat explicitly mentions an existing platform or environment.
+- Use `preferred_manufacturers` and `preferred_sellers` only for soft preferences like "prefer Dell" or "prefer TechPay Official".
+- Use `blocked_manufacturers` and `blocked_sellers` only for explicit exclusions like "avoid Lenovo" or "not from TechPay Partner Two".
+- Use `requested_ram_is_minimum` or `requested_storage_is_minimum` as true only when the chat makes the spec a must-have or minimum condition.
+- Use `minimum_warranty_years` when the buyer explicitly mentions a warranty expectation like `3 year warranty`.
+- Use `required_port_count` when the buyer explicitly mentions a switch or network port requirement like `24 ports`.
+- Use `required_throughput_mbps` when the buyer explicitly mentions a throughput requirement like `1 Gbps` or `500 Mbps`.
+- Use `required_duplex_printing` when the buyer explicitly requires duplex or double-sided printing.
+- Use `required_scanner` when the buyer explicitly requires scan, scanner, copy, or all-in-one capability.
+- Use `min_print_speed_ppm` when the buyer explicitly mentions a print-speed target like `30 ppm`.
+- Use `required_printer_type` when the buyer explicitly asks for a printer family such as `all-in-one`, `label printer`, `photo printer`, or `wide format`.
+- Use `required_print_technology` when the buyer explicitly asks for `laser`, `ink tank`, or `inkjet`.
+- Use `required_color_output` when the buyer explicitly requires `color`, `colour`, `mono`, `monochrome`, or `black and white`.
+- Use `min_monthly_duty_cycle_pages` when the buyer explicitly mentions a monthly print volume or duty cycle.
+- Use `required_automatic_document_feeder` when the buyer explicitly asks for `ADF` or `automatic document feeder`.
+- Use `required_paper_sizes` when the buyer explicitly mentions paper sizes like `A4`, `A3`, `Letter`, or `Legal`.
+- Use `required_network_roles` when the buyer explicitly asks for a `router`, `firewall`, `switch`, or `access point`.
+- Use `required_vpn_user_capacity` when the buyer explicitly gives a VPN or remote-user capacity target.
+- Use `required_virtualization_ready` when the buyer explicitly mentions virtualization or hypervisor workloads.
+- Use `required_virtualization_platforms` when the buyer explicitly names platforms like `VMware`, `Hyper-V`, `Proxmox`, or `KVM`.
+- Use `max_rack_units` when the buyer explicitly limits rack footprint like `2U max`.
+- Use `max_power_draw_watts` when the buyer explicitly limits power draw like `under 900W`.
+- Use `battery_life_hours_min` when the buyer explicitly states a minimum battery expectation like `12 hours battery`.
+- Use `cpu_preference` when the buyer explicitly names a processor family or class such as `Intel Core Ultra 7`, `Ryzen 7`, `Xeon`, or `Apple M3 Pro`.
+- Use `gpu_requirement` when the buyer explicitly names a graphics requirement such as `RTX 4070`, `Quadro`, `Radeon Pro`, or says `dedicated GPU`.
+- Use `screen_size_preference` when the buyer explicitly asks for a screen size such as `14 inch`, `14-inch`, or `15.6 inch`.
+- Use `weight_kg_max` when the buyer explicitly gives a maximum device weight such as `under 1.4 kg`, `below 3 lb`, or `lighter than 1.5 kg`.
+- Use `warranty_type_preference` when the buyer explicitly asks for a warranty style such as `onsite`, `on-site`, `carry-in`, `pickup and return`, `mail-in`, or `accidental damage`.
+- Use `require_returnable` as true only when the buyer explicitly requires returnable products or a return policy.
+- Prefer null over guessing when the budget or need is too ambiguous.
+- For generic office prompts like `new office`, `office setup`, or `office budget`, do not force a workload or category unless the chat includes stronger evidence.
+- Never extract team size, quantity, or headcount from money expressions such as `70-80k`, `1.4 lakh`, or `under 90000`.
+- When the budget is expressed as a range such as `70-80k`, convert it to a single numeric budget using the top of the acceptable range.
+
+Real-world interpretation hints:
+- `branch office`, `new site`, `warehouse site`, `remote office`, `store opening`, or `secure connectivity` often indicate networking and sometimes server infrastructure, but do not force both unless the chat supports both.
+- `front desk`, `reception`, `billing counter`, `back office printing`, `scan and copy`, or `shared printer` often indicate printers or document-output needs.
+- `traveling staff`, `field consultants`, `sales reps`, `roadshow`, `client meetings`, or `carry between home and office` often indicate laptop needs with portability and battery sensitivity.
+- `developer refresh`, `Docker`, `local DBs`, `VMs`, `containers`, `VS Code`, `builds`, or `local compute` often indicate software-development or server-infrastructure needs depending on whether the user is asking for end-user devices or shared infrastructure.
+- `warehouse`, `retail floor`, `branch ops`, `reception`, and `front desk` are setup hints, not product categories on their own. Use them to interpret the likely need only when paired with stronger device, workload, or capability evidence.
+- If the chat mixes multiple clearly different buying tracks in one sentence, capture the category and specs for each track as faithfully as possible. Do not collapse laptops, printers, networking, and servers into a single category when the user clearly mentions more than one.
+
+Examples:
+- Input: `same as last time but better battery for sales people, maybe around 70-80k, not too bulky`
+  Output intent: end-user device need, likely laptops, workload office_productivity, budget 80000, portability high, no team_size.
+- Input: `New joiners are coming next month. They mostly code, join calls, and use some design tools. Keep it light to carry.`
+  Output intent: likely laptops, workloads software_development and creative_design, portability high, budget null.
+- Input: `We need 12 laptops for developers and also firewall plus switching for a branch office, total budget is 8 lakh.`
+  Output intent: capture both developer-device need and branch-networking need; do not invent extra intents beyond those supported by the chat.
+- Input: `Need a branch switch with at least 24 ports and 1 Gbps throughput, budget 3 lakh total.`
+  Output intent: networking need, budget 300000, required_port_count 24, required_throughput_mbps 1000.
+- Input: `Need a color duplex all-in-one printer with scanner and at least 30 ppm under 25000.`
+  Output intent: printers need, budget 25000, required_duplex_printing true, required_scanner true, min_print_speed_ppm 30.
+- Input: `Need a color laser all-in-one with ADF, A3 support, and around 20k pages per month.`
+  Output intent: printers need, required_print_technology laser, required_color_output color, required_printer_type all_in_one_printer, required_automatic_document_feeder true, required_paper_sizes [A3], min_monthly_duty_cycle_pages 20000.
+- Input: `Need a branch firewall for 60 VPN users and a switch for the floor.`
+  Output intent: networking need, required_network_roles should include firewall and switch, required_vpn_user_capacity 60.
+- Input: `Need a 2U virtualization server for VMware and Hyper-V, keep power under 900W.`
+  Output intent: servers need, required_virtualization_ready true, required_virtualization_platforms [vmware, hyper-v], max_rack_units 2, max_power_draw_watts 900.
+- Input: `Need laptops with 3 year warranty and 32GB RAM minimum.`
+  Output intent: laptops need, minimum_warranty_years 3, requested_ram 32GB, requested_ram_is_minimum true.
+- Input: `Field consultants need something that lasts 12 hours, ideally Core Ultra 7, with dedicated GPU for demo rendering.`
+  Output intent: likely laptops, battery_life_hours_min 12, cpu_preference Core Ultra 7, gpu_requirement dedicated_gpu.
+- Input: `Road warriors need 14-inch machines under 1.45 kg with onsite warranty, and battery should still hold up for a full day.`
+  Output intent: likely laptops, screen_size_preference 14 inch, weight_kg_max 1.45, warranty_type_preference onsite, battery_life_hours_min 12 or null unless hours are explicitly stated.
+- Input: `Need compact designer laptops, around 15.6 inch is fine, but keep them below 1.8 kg and do not send carry-in warranty.`
+  Output intent: likely laptops, screen_size_preference 15.6 inch, weight_kg_max 1.8, warranty_type_preference should only be set if the chat explicitly prefers a supported warranty type rather than just rejecting one.
+- Input: `We are opening a new office and have around 6 lakh total.`
+  Output intent: budget 600000, but category and workload should stay null if the chat gives no stronger need signal.
+- Input: `Warehouse site needs secure connectivity up front and maybe a small back-room host, but power and footprint are tight.`
+  Output intent: likely network_connectivity and possibly server_infrastructure if the server clue is explicit; category should stay null if the buying tracks are not specific enough.
+- Input: `Reception needs a shared printer for scan-copy jobs, while the sales team needs lightweight travel machines.`
+  Output intent: this contains more than one buying track; preserve printer/document-output and laptop/office-productivity signals separately instead of collapsing them.
+
+Current known context:
+{known_context}
+
+Raw user chat:
+{chat_text}
+
+Return JSON with exactly these keys:
+{schema_keys}

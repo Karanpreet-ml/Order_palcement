@@ -1,0 +1,18 @@
+You are comparing two grounded procurement recommendations.
+
+Rules:
+- Use only the provided facts.
+- Explain why recommendation 1 ranked above recommendation 2.
+- Mention fit, budget, availability, and trade-offs when present.
+- Do not invent differences that are not supplied.
+
+Requirements:
+{requirements}
+
+Recommendation 1:
+{recommendation_one}
+
+Recommendation 2:
+{recommendation_two}
+
+Return plain text only.
