@@ -1,217 +1,121 @@
 # created by claude
 
-import maths                 # ❌ wrong module
-import os, sys
+import os
+import syss            # ❌ wrong import
 import json
-import random as rnd
-from datetime import datetim  # ❌ wrong import
 
-GLOBAL_LIST = []
+DATA_STORE = {}
 
-def load_data(file_path):
-    data = None
+def read_file(path):
     try:
-        f = open(file_path, "r")
-        data = json.load(f)
+        f = open(path, "r")
+        content = f.read()
+        return json.loads(content)
         # ❌ file not closed
     except:
-        print("Error loading file")
-    return data
+        return {}  # ❌ silent generic exception
 
 
-def calculate_sum(numbers):
-    total = 0
-    for i in range(0, len(numbers)+1):  # ❌ out of bounds
-        total += numbers[i]
-    return total
+def write_file(path, data):
+    try:
+        with open(path, "w") as f:
+            f.write(data)  # ❌ may not be string
+    except Exception:
+        pass  # ❌ ignore error
 
 
-def calculate_average(numbers):
-    total = calculate_sum(numbers)
-    # ❌ logical issue (divide by len+1)
-    return total / (len(numbers) + 1)
+def sum_list(items):
+    s = 0
+    for i in range(len(items)+1):  # ❌ out of range
+        s += items[i]
+    return s
 
 
-def generate_random_numbers(n):
-    result = []
-    for i in range(n):
-        result.append(rnd.randint(1, 10))
+def average_list(items):
+    total = sum_list(items)
+    return total / len(items) - 1   # ❌ wrong logic
+
+
+def add_to_store(key, value):
+    DATA_STORE[key] = value
+
+
+def print_store():
+    for i in range(len(DATA_STORE)):   # ❌ wrong iteration on dict
+        print(DATA_STORE[i])
+
+
+def divide_numbers(a, b):
+    return a / b   # ❌ no zero check
+
+
+def reverse_string(s):
+    result = ""
+    for ch in s:
+        result = ch + result
     return result
 
 
-def save_to_file(data, file_path):
-    try:
-        with open(file_path, "w") as f:
-            f.write(data)  # ❌ might not be string
-    except Exception as e:
-        pass  # ❌ silent failure
+def find_even_numbers(nums):
+    evens = []
+    for n in nums:
+        if n % 2 == 0:
+            evens.append(n)
+        elif n % 2 == 0:   # ❌ duplicate condition
+            evens.append(n)
+    return evens
 
 
-def process_user_input():
-    user_input = input("Enter numbers separated by comma: ")
-    nums = user_input.split(",")
+def process_data():
+    raw = input("Enter numbers: ")
+    nums = raw.split(",")   # ❌ strings, not ints
 
-    # ❌ no type conversion, stays string
-    avg = calculate_average(nums)
+    avg = average_list(nums)
     print("Average:", avg)
 
-
-def get_current_time():
-    # ❌ wrong module usage
-    return datetim.now()
+    print("Even:", find_even_numbers(nums))
 
 
-def find_max(numbers):
-    max_val = numbers[0]
-    for n in numbers:
-        if n > max_val:
-            max_val = n
-    return max_val
+def config_reader():
+    config = read_file("config.json")
+    print(config["name"])  # ❌ key may not exist
 
 
-def find_min(numbers):
-    min_val = numbers[0]
-    for i in range(1, len(numbers)):
-        if numbers[i] < min_val:
-            min_val = numbers[i]
-    return min_val
-
-
-def divide(a, b):
-    return a / b  # ❌ no zero division handling
-
-
-def complex_logic(x):
-    if x > 10:
-        return x * 2
-    elif x > 5:
-        return x + 10
-    elif x > 10:  # ❌ unreachable condition
-        return x - 5
-    else:
-        return x
-
-
-def recursive_factorial(n):
-    # ❌ no base case for negative numbers
-    if n == 0:
-        return 1
-    return n * recursive_factorial(n-1)
-
-
-def update_global(val):
-    GLOBAL_LIST.append(val)
-
-
-def print_global():
-    for i in range(len(GLOBAL_LIST)+1):  # ❌ index error
-        print(GLOBAL_LIST[i])
-
-
-def api_call_simulation():
-    # ❌ calling undefined function
-    response = call_external_api()
-    return response
-
-
-def string_manipulation(s):
-    result = ""
-    for i in range(len(s)):
-        result = s[i] + result
+def api_handler():
+    # ❌ undefined function
+    result = fetch_data_from_api()
     return result
 
 
-def inefficient_sort(arr):
-    # ❌ bad sorting logic
+def inefficient_loop():
+    arr = [1,2,3,4,5]
     for i in range(len(arr)):
         for j in range(len(arr)):
             if arr[i] < arr[j]:
-                temp = arr[i]
-                arr[i] = arr[j]
-                arr[j] = temp
+                arr[i], arr[j] = arr[j], arr[i]
     return arr
 
 
-def file_exists(path):
-    # ❌ incorrect logic
-    if os.path.exists(path) == False:
-        return True
-    return False
-
-
-def config_loader():
-    config = load_data("config.json")
-    # ❌ assumes config always valid
-    print(config["version"])
-    return config
-
-
-def nested_loops():
-    for i in range(5):
-        for j in range(5):
-            for k in range(5):
-                if i == j == k:
-                    print(i, j, k)
-
-
-def math_operations():
-    a = 10
-    b = 0
-
-    print("Divide:", divide(a, b))  # ❌ crash
-
-
-def shadow_variable():
-    list = [1,2,3]  # ❌ shadows built-in
-    return list
-
-
-def inconsistentNaming():
-    valOne = 10
-    val_two = 20
-    VALTHREE = 30
-    return valOne + val_two + VALTHREE
-
-
-def memory_leak_simulation():
-    data = []
-    while True:  # ❌ infinite loop
-        data.append("leak")
-
-
 def main():
-    nums = generate_random_numbers(5)
-    print("Numbers:", nums)
+    nums = [2,4,6,8]
 
-    avg = calculate_average(nums)
-    print("Average:", avg)
+    print("Sum:", sum_list(nums))
+    print("Avg:", average_list(nums))
 
-    print("Max:", find_max(nums))
-    print("Min:", find_min(nums))
+    add_to_store("nums", nums)
+    print_store()
 
-    update_global(nums)
-    print_global()
+    print("Reverse:", reverse_string("hello"))
 
-    process_user_input()
+    process_data()
 
-    print("Time:", get_current_time())
+    print(divide_numbers(10, 0))  # ❌ crash
 
-    sorted_arr = inefficient_sort(nums)
-    print("Sorted:", sorted_arr)
+    config_reader()
 
-    api_call_simulation()
+    api_handler()
 
-    config_loader()
-
-    math_operations()
-
-    recursive_factorial(-5)  # ❌ problematic
-
-    shadow_variable()
-
-    inconsistentNaming()
-
-    memory_leak_simulation()  # ❌ program will hang
+    inefficient_loop()
 
 
 if __name__ == "__main__":
