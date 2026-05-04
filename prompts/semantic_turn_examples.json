@@ -1,0 +1,750 @@
+[
+  {
+    "input": "We need 15 laptops for developers, budget is 75000 per device.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "new_request",
+      "user_goal_summary": "Need laptops for developers with a per-unit budget.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "add_unit",
+          "target_unit_ref": "",
+          "field_path": null,
+          "value": null,
+          "fields": {
+            "category": "laptops",
+            "team_size": 15,
+            "quantity": 15,
+            "budget": 75000,
+            "budget_scope": "per_unit",
+            "workloads": ["software_development"]
+          },
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.9,
+          "evidence_text": "We need 15 laptops for developers, budget is 75000 per device."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Add printers for the office team.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Add a printer unit for the office team.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "add_unit",
+          "target_unit_ref": "",
+          "field_path": null,
+          "value": null,
+          "fields": {
+            "category": "printers"
+          },
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.82,
+          "evidence_text": "Add printers for the office team."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Remove networking from the plan.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Remove the networking unit from the current plan.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "remove_unit",
+          "target_unit_ref": "unit_networking_1",
+          "field_path": null,
+          "value": null,
+          "fields": null,
+          "target_resolution_status": "resolved",
+          "target_candidates": [],
+          "confidence": 0.85,
+          "evidence_text": "Remove networking from the plan."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Replace laptops with desktops under 90000.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Replace the existing laptop unit with a desktop unit.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "replace_unit",
+          "target_unit_ref": "unit_laptops_1",
+          "field_path": null,
+          "value": null,
+          "fields": {
+            "category": "desktops",
+            "budget": 90000
+          },
+          "target_resolution_status": "resolved",
+          "target_candidates": [],
+          "confidence": 0.86,
+          "evidence_text": "Replace laptops with desktops under 90000."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Increase the laptop budget to 82000.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Update the budget on the laptop unit.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "update_unit",
+          "target_unit_ref": "unit_laptops_1",
+          "field_path": "budget",
+          "value": 82000,
+          "fields": null,
+          "target_resolution_status": "resolved",
+          "target_candidates": [],
+          "confidence": 0.84,
+          "evidence_text": "Increase the laptop budget to 82000."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Set the laptop quantity to 25.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Update the quantity on the laptop unit.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "update_unit",
+          "target_unit_ref": "unit_laptops_1",
+          "field_path": "quantity",
+          "value": 25,
+          "fields": null,
+          "target_resolution_status": "resolved",
+          "target_candidates": [],
+          "confidence": 0.83,
+          "evidence_text": "Set the laptop quantity to 25."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Clear the laptop budget.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Clear the budget field on the laptop unit.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "clear_field",
+          "target_unit_ref": "unit_laptops_1",
+          "field_path": "budget",
+          "value": null,
+          "fields": null,
+          "target_resolution_status": "resolved",
+          "target_candidates": [],
+          "confidence": 0.84,
+          "evidence_text": "Clear the laptop budget."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Clear the budget scope.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Clear the global budget scope.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "clear_global",
+          "target_unit_ref": "",
+          "field_path": "budget_scope",
+          "value": null,
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.84,
+          "evidence_text": "Clear the budget scope."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Our total budget is 600000.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "new_request",
+      "user_goal_summary": "Set the overall project budget.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "budget",
+          "value": 600000,
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.82,
+          "evidence_text": "Our total budget is 600000."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "It is per unit.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "answer_clarification",
+      "user_goal_summary": "Answer the budget scope clarification.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "budget_scope",
+          "value": "per_unit",
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.8,
+          "evidence_text": "It is per unit."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Overall budget for all devices.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "answer_clarification",
+      "user_goal_summary": "Answer that the budget scope is overall.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "budget_scope",
+          "value": "project_total",
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.8,
+          "evidence_text": "Overall budget for all devices."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "We use Docker, VS Code, and browsers all day.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "new_request",
+      "user_goal_summary": "Set software development and office productivity workloads.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "workloads",
+          "value": ["software_development", "office_productivity"],
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.82,
+          "evidence_text": "We use Docker, VS Code, and browsers all day."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Need 32 GB RAM on the laptop.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Update the laptop RAM requirement.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "update_unit",
+          "target_unit_ref": "unit_laptops_1",
+          "field_path": "requested_ram_gb",
+          "value": 32,
+          "fields": null,
+          "target_resolution_status": "resolved",
+          "target_candidates": [],
+          "confidence": 0.82,
+          "evidence_text": "Need 32 GB RAM on the laptop."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Need 1 TB SSD on the laptop.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Update the laptop storage requirement.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "update_unit",
+          "target_unit_ref": "unit_laptops_1",
+          "field_path": "requested_storage_gb",
+          "value": 1024,
+          "fields": null,
+          "target_resolution_status": "resolved",
+          "target_candidates": [],
+          "confidence": 0.82,
+          "evidence_text": "Need 1 TB SSD on the laptop."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "We want a 3 year warranty.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "new_request",
+      "user_goal_summary": "Set the warranty requirement.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "minimum_warranty_years",
+          "value": 3,
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.82,
+          "evidence_text": "We want a 3 year warranty."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Balanced performance is fine.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "answer_clarification",
+      "user_goal_summary": "Answer that balanced performance is preferred.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "performance_priority",
+          "value": "balanced",
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.8,
+          "evidence_text": "Balanced performance is fine."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Rapid growth over the next year.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "answer_clarification",
+      "user_goal_summary": "Answer that rapid growth is expected.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "growth_expectation",
+          "value": "rapid_growth",
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.8,
+          "evidence_text": "Rapid growth over the next year."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "What did you recommend again?",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "recall_recommendation",
+      "user_goal_summary": "Recall the latest recommendation.",
+      "assistant_mode_hint": "brief_recap",
+      "operations": [],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_recall"
+    }
+  },
+  {
+    "input": "Hello",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "general_question",
+      "user_goal_summary": "Greeting.",
+      "assistant_mode_hint": "friendly_brief",
+      "operations": [],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_greeting"
+    }
+  },
+  {
+    "input": "Tell me a joke.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "out_of_scope",
+      "user_goal_summary": "Out of scope request.",
+      "assistant_mode_hint": "polite_redirect",
+      "operations": [],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_redirect"
+    }
+  },
+  {
+    "input": "Keep it under 25k total.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "answer_clarification",
+      "user_goal_summary": "Answer the prior budget clarification with a project-total budget.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "budget",
+          "value": 25000,
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.82,
+          "evidence_text": "Keep it under 25k total."
+        },
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "budget_scope",
+          "value": "project_total",
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.82,
+          "evidence_text": "Keep it under 25k total."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "We need a server for virtualization. Nothing fancy, but reliability matters.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "new_request",
+      "user_goal_summary": "Add a server unit for virtualization.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "add_unit",
+          "target_unit_ref": "",
+          "field_path": null,
+          "value": null,
+          "fields": {
+            "category": "servers",
+            "workloads": ["server_infrastructure"]
+          },
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.84,
+          "evidence_text": "We need a server for virtualization. Nothing fancy, but reliability matters."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Need laptops for analysts.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "new_request",
+      "user_goal_summary": "Add a laptop unit for analysts.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "add_unit",
+          "target_unit_ref": "",
+          "field_path": null,
+          "value": null,
+          "fields": {
+            "category": "laptops"
+          },
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.84,
+          "evidence_text": "Need laptops for analysts."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Which one was the cheaper option you showed me earlier?",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "recall_recommendation",
+      "user_goal_summary": "Recall and compare an earlier recommendation option.",
+      "assistant_mode_hint": "brief_recap",
+      "operations": [],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_recall"
+    }
+  },
+  {
+    "input": "Remove networking from the plan.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ambiguous",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Target resolution is ambiguous for category networking.",
+      "assistant_mode_hint": "clarify_target",
+      "operations": [],
+      "ambiguities": [
+        {
+          "kind": "target_reference",
+          "message": "Could not deterministically resolve the networking unit target.",
+          "candidate_unit_ids": ["unit_networking_1", "unit_networking_2"]
+        }
+      ],
+      "reference_resolution": {"status": "ambiguous"},
+      "safe_acknowledgement_hint": "ack_clarify"
+    }
+  },
+  {
+    "input": "Remove the printer and add one 32-inch monitor instead.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ambiguous",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Mixed remove and add edit with unresolved existing printer target.",
+      "assistant_mode_hint": "clarify_target",
+      "operations": [],
+      "ambiguities": [
+        {
+          "kind": "target_reference",
+          "message": "Could not deterministically resolve the printers unit target.",
+          "candidate_unit_ids": []
+        }
+      ],
+      "reference_resolution": {"status": "ambiguous"},
+      "safe_acknowledgement_hint": "ack_clarify"
+    }
+  },
+  {
+    "input": "Ignore the old overall budget cap for now.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Clear the global overall budget cap.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "clear_global",
+          "target_unit_ref": "",
+          "field_path": "budget",
+          "value": null,
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.74,
+          "evidence_text": "Ignore the old overall budget cap for now."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "Actually skip the NAS box. Put a small server there instead.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ambiguous",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Substitute an unresolved existing NAS target with a server.",
+      "assistant_mode_hint": "clarify_target",
+      "operations": [],
+      "ambiguities": [
+        {
+          "kind": "target_reference",
+          "message": "Could not deterministically resolve the storage/NAS unit target.",
+          "candidate_unit_ids": []
+        }
+      ],
+      "reference_resolution": {"status": "ambiguous"},
+      "safe_acknowledgement_hint": "ack_clarify"
+    }
+  },
+  {
+    "input": "Also add two meeting-room displays.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "modify_existing",
+      "user_goal_summary": "Add a meeting-room display unit to the existing procurement plan.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "add_unit",
+          "target_unit_ref": "",
+          "field_path": null,
+          "value": null,
+          "fields": {
+            "category": "meeting_room_displays",
+            "quantity": 2
+          },
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.74,
+          "evidence_text": "Also add two meeting-room displays."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  },
+  {
+    "input": "2 lakh for laptops and 1 lakh for printers.",
+    "output": {
+      "schema_version": "2026-04-17",
+      "parse_status": "ok",
+      "turn_kind": "answer_clarification",
+      "user_goal_summary": "Set explicit shared budget allocation across categories.",
+      "assistant_mode_hint": "direct",
+      "operations": [
+        {
+          "op": "set_global",
+          "target_unit_ref": "",
+          "field_path": "shared_budget_allocation",
+          "value": {
+            "laptops": 200000,
+            "printers": 100000
+          },
+          "fields": null,
+          "target_resolution_status": "not_applicable",
+          "target_candidates": [],
+          "confidence": 0.74,
+          "evidence_text": "2 lakh for laptops and 1 lakh for printers."
+        }
+      ],
+      "ambiguities": [],
+      "reference_resolution": {"status": "resolved"},
+      "safe_acknowledgement_hint": "ack_generic"
+    }
+  }
+]
