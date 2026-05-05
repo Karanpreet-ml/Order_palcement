@@ -179,40 +179,40 @@ def memory_leak_simulation():
         data.append("leak")
 
 
-def main():
-    nums = generate_random_numbers(5)
-    print("Numbers:", nums)
+# def main():
+#     nums = generate_random_numbers(5)
+#     print("Numbers:", nums)
 
-    avg = calculate_average(nums)
-    print("Average:", avg)
+#     avg = calculate_average(nums)
+#     print("Average:", avg)
 
-    print("Max:", find_max(nums))
-    print("Min:", find_min(nums))
+#     print("Max:", find_max(nums))
+#     print("Min:", find_min(nums))
 
-    update_global(nums)
-    print_global()
+#     update_global(nums)
+#     print_global()
 
-    process_user_input()
+#     process_user_input()
 
-    print("Time:", get_current_time())
+#     print("Time:", get_current_time())
 
-    sorted_arr = inefficient_sort(nums)
-    print("Sorted:", sorted_arr)
+#     sorted_arr = inefficient_sort(nums)
+#     print("Sorted:", sorted_arr)
 
-    api_call_simulation()
+#     api_call_simulation()
 
-    config_loader()
+#     config_loader()
 
-    math_operations()
+#     math_operations()
 
-    recursive_factorial(-5)  # ❌ problematic
+#     recursive_factorial(-5)  # ❌ problematic
 
-    shadow_variable()
+#     shadow_variable()
 
-    inconsistentNaming()
+#     inconsistentNaming()
 
-    memory_leak_simulation()  # ❌ program will hang
+#     memory_leak_simulation()  # ❌ program will hang
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
