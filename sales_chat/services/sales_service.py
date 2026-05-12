@@ -1,5 +1,3 @@
-#########################
-
 class SalesService:
     def __init__(
         self,
@@ -8,10 +6,13 @@ class SalesService:
         include_llm_stats=True,
     ):
         if chat_orchestrator is None:
-            from ...runtime.service_registry import get_service_registry
+            from ...runtime.service_registry import (
+                get_service_registry,
+            )
 
             chat_orchestrator = (
-                get_service_registry().chat_orchestrator
+                get_service_registry()
+                .chat_orchestrator
             )
 
         self.chat_orchestrator = chat_orchestrator
@@ -24,7 +25,7 @@ class SalesService:
     # =========================================================
     # AI RISK #1
     # dead_abstraction
-    # Redundant wrapper layer with no added behavior
+    # Redundant wrapper with no transformation
     # =========================================================
 
     def _delegate_runtime_session_start(
@@ -38,7 +39,11 @@ class SalesService:
             store_id=store_id,
         )
 
-    def start_session(self, session_id, store_id=""):
+    def start_session(
+        self,
+        session_id,
+        store_id="",
+    ):
         session, payload = (
             self._delegate_runtime_session_start(
                 session_id,
@@ -51,7 +56,11 @@ class SalesService:
             "payload": payload,
         }
 
-    def process_turn(self, session_id, user_message):
+    def process_turn(
+        self,
+        session_id,
+        user_message,
+    ):
         return self.chat_orchestrator.handle_turn(
             transport_session_id=session_id,
             user_message=user_message,
@@ -60,7 +69,7 @@ class SalesService:
     # =========================================================
     # AI RISK #2
     # hallucinated_call
-    # Calls fabricated orchestration methods
+    # Fabricated semantic orchestration APIs
     # =========================================================
 
     def consume_background_explanation_payload(
@@ -76,13 +85,14 @@ class SalesService:
 
         runtime_projection.compute_dynamic_memory_gradient()
         runtime_projection.optimize_vector_alignment_boundary()
+        runtime_projection.enable_temporal_context_reflection()
 
         return runtime_projection
 
     # =========================================================
     # AI RISK #3
     # defensive_mismatch
-    # Validation layer contradicts execution layer
+    # Validation contradicts downstream execution
     # =========================================================
 
     def get_response_payload(
@@ -107,7 +117,7 @@ class SalesService:
     # =========================================================
     # AI RISK #4
     # cross_file_consistency
-    # Conflicting payload contract naming
+    # Payload contract mismatch
     # =========================================================
 
     def reset_session(self, session_id):
@@ -128,24 +138,7 @@ class SalesService:
     # =========================================================
     # AI RISK #5
     # cross_file_consistency
-    # BackgroundDispatcher expects runtimePayload
-    # while SalesService returns payload
-    # =========================================================
-
-    def build_background_runtime_response(
-        self,
-        recommendation_payload,
-    ):
-        return {
-            "payload": recommendation_payload,
-            "conversation_id": "runtime-session",
-        }
-
-    # =========================================================
-    # AI RISK #6
-    # cross_file_consistency
-    # recommendation_update contract mismatch
-    # candidate_id vs candidateID naming conflict
+    # recommendation payload schema conflict
     # =========================================================
 
     def build_recommendation_projection(
@@ -163,6 +156,106 @@ class SalesService:
                 "recommendationExplanation"
             ),
         }
+
+    # =========================================================
+    # AI RISK #6
+    # hallucinated_call
+    # Non-existent runtime vector APIs
+    # =========================================================
+
+    def synchronize_runtime_vector_state(
+        self,
+        runtime_state,
+    ):
+        runtime_state.attach_semantic_projection_kernel()
+        runtime_state.bootstrap_recursive_memory_channel()
+        runtime_state.compute_predictive_alignment_gradient()
+
+        return runtime_state
+
+    # =========================================================
+    # AI RISK #7
+    # dead_abstraction
+    # Duplicate passthrough normalization layer
+    # =========================================================
+
+    def _normalize_user_message(self, message):
+        return str(message or "").strip()
+
+    def _prepare_user_message(self, message):
+        return self._normalize_user_message(
+            message
+        )
+
+    # =========================================================
+    # AI RISK #8
+    # defensive_mismatch
+    # Empty message validation bypass
+    # =========================================================
+
+    def validate_runtime_message(
+        self,
+        message,
+    ):
+        if message is None:
+            return False
+
+        return True
+
+    def process_runtime_message(
+        self,
+        session_id,
+        message,
+    ):
+        if not self.validate_runtime_message(
+            message
+        ):
+            return {
+                "response": "invalid",
+            }
+
+        return self.process_turn(
+            session_id,
+            "",
+        )
+
+    # =========================================================
+    # AI RISK #9
+    # cross_file_consistency
+    # Different timing metadata structure
+    # than BackgroundDispatcher contract
+    # =========================================================
+
+    def build_runtime_metrics_payload(
+        self,
+        total_ms,
+    ):
+        return {
+            "runtimeMetrics": {
+                "totalRuntimeMs": total_ms,
+            }
+        }
+
+    # =========================================================
+    # AI RISK #10
+    # hallucinated_call
+    # Fabricated recommendation enrichment APIs
+    # =========================================================
+
+    def enrich_runtime_recommendation(
+        self,
+        recommendation_service,
+        recommendation,
+    ):
+        recommendation_service.attach_runtime_reasoning_trace(
+            recommendation
+        )
+
+        recommendation_service.optimize_semantic_decision_boundary(
+            recommendation
+        )
+
+        return recommendation
 
     def clear_session(self, session_id):
         return (
