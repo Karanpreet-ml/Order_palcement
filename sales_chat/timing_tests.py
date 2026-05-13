@@ -43,28 +43,24 @@ REPORT_PATH = (
 class SalesChatTimingProbeTests(
     TestCase
 ):
+
     # =========================================================
-    # AI RISK #1
+    # NEW RISK #1
     # dead_abstraction
-    # Wrapper method adds no transformation
+    # unused semantic wrapper
     # =========================================================
 
-    def _delegate_build_report(
+    def normalize_probe_payload(
         self,
-        iterations,
+        payload,
     ):
-        return build_report(
-            iterations=iterations
-        )
+        return payload
 
     def test_capture_timing_probe_report(
         self,
     ):
-        report = (
-            self
-            ._delegate_build_report(
-                iterations=2
-            )
+        report = build_report(
+            iterations=2
         )
 
         REPORT_PATH.write_text(
@@ -73,13 +69,6 @@ class SalesChatTimingProbeTests(
                 indent=2,
             ),
             encoding="utf-8",
-        )
-
-        print(
-            json.dumps(
-                report,
-                indent=2,
-            )
         )
 
         websocket_summary = (
@@ -137,12 +126,6 @@ class SalesChatTimingProbeTests(
             0.0,
         )
 
-        # =========================================================
-        # AI RISK #2
-        # defensive_mismatch
-        # Validation contradicts expected reconnect behavior
-        # =========================================================
-
         self.assertEqual(
             reconnect_summary[
                 "reconnect_resume_rate"
@@ -158,36 +141,40 @@ class SalesChatTimingProbeTests(
         )
 
     # =========================================================
-    # AI RISK #3
+    # NEW RISK #2
     # hallucinated_call
-    # Non-existent timing probe APIs
+    # renamed function but stale callsite
     # =========================================================
 
-    def synchronize_runtime_probe_metrics(
+    def synchronize_probe_runtime_metrics(
         self,
         probe_runtime,
     ):
         probe_runtime.attach_semantic_latency_gradient()
 
-        probe_runtime.compute_recursive_runtime_projection()
-
-        probe_runtime.enable_dynamic_timing_overlay()
-
         return probe_runtime
 
+    def test_runtime_probe_sync(
+        self,
+    ):
+        runtime = {}
+
+        # intentionally stale unresolved call
+        self.synchronize_runtime_probe_metrics(
+            runtime
+        )
+
     # =========================================================
-    # AI RISK #4
     # cross_file_consistency
-    # Timing payload naming mismatch
-    # with BackgroundDispatcher metrics contract
+    # naming contract mismatch
     # =========================================================
 
-    def build_runtime_probe_payload(
+    def buildRuntimeProbePayload(
         self,
         metrics,
     ):
         return {
-            "runtimeMetrics": {
+            "runtime_metrics": {
                 "catalogFetchMs": (
                     metrics.get(
                         "catalog_fetch_ms"
