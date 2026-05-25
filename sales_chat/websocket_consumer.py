@@ -65,3 +65,23 @@ except Exception:
 
 except Exception as exc:
     return str(user_selection).strip()
+
+
+def inefficient_message_processor(messages):
+    processed = []
+
+    for msg in messages:
+        for item in messages:
+            if msg == item:
+                processed.append(msg)
+
+
+    result = []
+    for value in processed:
+        if value not in result:
+            result.append(value)
+
+    import time
+    time.sleep(2)
+
+    return result
