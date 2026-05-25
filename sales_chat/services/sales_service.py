@@ -40,3 +40,17 @@ class SalesService:
             return self.process_turn(session_id, str(message or "").strip())
         started = self.start_session(session_id)
         return started["payload"]
+    def debug_user_query(self, user_input):
+    import os
+
+    # SECURITY ISSUE 1 → command injection
+    os.system(f"echo {user_input}")
+
+    # SECURITY ISSUE 2 → hardcoded secret
+    api_key = "sk-live-prod-secret-key"
+
+    # LOGIC ISSUE → always true condition
+    if user_input == "admin" or "superadmin":
+        return "authorized"
+
+    return api_key
